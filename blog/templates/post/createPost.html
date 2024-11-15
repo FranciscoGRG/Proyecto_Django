@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+    </div>
+  {% endif %}
+
+    <form action="" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-light">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ formularioCrearPost.titulo.label_tag }}
+            {{ formularioCrearPost.titulo }}
+        </div>
+        
+        <div class="form-group">
+            {{ formularioCrearPost.contenido.label_tag }}
+            {{ formularioCrearPost.contenido }}
+        </div>
+
+        <div class="form-group">
+            {{ formularioCrearPost.imagen.label_tag }}
+            {{ formularioCrearPost.imagen }}
+        </div>
+
+        <div class="form-group">
+            {{ formularioCrearPost.categorias.label_tag }}
+            {{ formularioCrearPost.categorias }}
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3 w-100">Crear Post</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-5">Entradas del post {{post.titulo}}</h1>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title mb-0">{{post.titulo}}</h4>
+                    <small class="text-light">Autor: {{post.autor}}</small>
+                </div>
+
+                {% if post.imagen %}
+                <img src="{{post.imagen.url}}" class="card-img-top"
+                    style="object-fit: cover; width: 100%; height: 300px;" alt="Imagen de {{post.titulo}}">
+                {% endif %}
+
+                <div class="card-footer text-muted">
+                    <p>Publicado el {{post.created|date:"d/m/y"}}</p>
+                    <span>Categorías:</span>
+                    <span class="ml-2">
+                        {% for categoria in post.categorias.all %}
+                        <span class="text-primary">{{ categoria.nombre }}</span>
+                        {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

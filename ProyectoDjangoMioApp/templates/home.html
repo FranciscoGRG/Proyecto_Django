@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Sección de bienvenida -->
+    <div class="container text-center py-5" style="background-color: #f8f9fa; border-radius: 10px;">
+        <h1 class="mb-4 text-primary">Bienvenido a mi Blog</h1>
+        <p class="lead text-dark">Un espacio donde comparto mis pensamientos, ideas y experiencias sobre diversos temas. ¡Espero que disfrutes la lectura!</p>
+
+        <!-- Botones de navegación con colores -->
+        <div class="mt-5">
+            <a href="#" class="btn btn-success btn-lg mx-2">Leer Últimos Posts</a>
+            <a href="#" class="btn btn-warning btn-lg mx-2">Sobre Mí</a>
+            <a href="#" class="btn btn-info btn-lg mx-2">Contáctame</a>
+        </div>
+    </div>
+
+    <!-- Sección de descripción del blog con fondo -->
+    <div class="container mt-5 py-4" style="background-color: #e9ecef; border-radius: 10px;">
+        <h2 class="mb-3 text-secondary">¿Qué encontrarás en este blog?</h2>
+        <p class="text-dark">Este blog está diseñado para compartir contenido sobre desarrollo web, tecnología, productividad, y temas de interés general. Aquí podrás encontrar artículos que te ayudarán a mejorar tus habilidades, explorar nuevas ideas y mantenerte al día con las últimas tendencias del mundo digital.</p>
+    </div>
+
+    <!-- Sección de categorías con tarjetas de colores -->
+    <div class="container mt-5 py-4" style="background-color: #f0f8ff; border-radius: 10px;">
+        <h2 class="mb-4 text-primary">Categorías Populares</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-center shadow-lg" style="border-color: #28a745;">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Tecnología</h5>
+                        <p class="card-text">Artículos sobre las últimas innovaciones tecnológicas.</p>
+                        <a href="#" class="btn btn-success">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center shadow-lg" style="border-color: #ffc107;">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Productividad</h5>
+                        <p class="card-text">Consejos y trucos para mejorar tu productividad diaria.</p>
+                        <a href="#" class="btn btn-warning">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center shadow-lg" style="border-color: #17a2b8;">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">Desarrollo Web</h5>
+                        <p class="card-text">Tutoriales y guías sobre desarrollo web y programación.</p>
+                        <a href="#" class="btn btn-info">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de contacto con un estilo de fondo llamativo -->
+    <div class="container mt-5 py-4" style="background-color: #ffebcd; border-radius: 10px;">
+        <h2 class="mb-4 text-danger">Contáctame</h2>
+        <p class="text-dark">Si tienes preguntas o deseas colaborar en algún proyecto, no dudes en ponerte en contacto conmigo. Estoy abierto a nuevas oportunidades y siempre dispuesto a aprender y compartir conocimientos.</p>
+        <a href="#" class="btn btn-danger btn-lg">Enviar un mensaje</a>
+    </div>
+{% endblock %}
