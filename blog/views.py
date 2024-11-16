@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
-from .models import Post, Categoria
-from .forms import FormularioCrearPost, FormularioEditarPost
+from .models import Post, Categoria, Comment
+from .forms import FormularioCrearPost, FormularioEditarPost, FormularioComentario
 from django.contrib import messages
 
 # Create your views here.
+
+# Vista para mostrar los post
 def blog(request):
     posts = Post.objects.all()
     return render(request, 'blog/blog.html', {'posts': posts})
 
 
+# Vista para mostrar el formulario para crear un post y procesarlo
 def create_post(request):
     formularioCrearPost = FormularioCrearPost()
 
@@ -43,11 +46,31 @@ def create_post(request):
                   {'formularioCrearPost': formularioCrearPost})
 
 
+# Vista para mostrar los detalles de un post
 def read_post(request):
+    
+    formularioComentario = FormularioComentario() 
     post_id = request.GET.get('post_id')
     post = Post.objects.get(pk=post_id)
-    return render(request, 'post/readPost.html',{'post':post})
+    comentarios = Comment.objects.filter(post=post)
+    
+    if request.method == 'POST':
+        formularioComentario = FormularioComentario(data=request.POST)
+    
+        if formularioComentario.is_valid():
+            comentario = Comment(
+                texto = formularioComentario.cleaned_data["texto"],
+                autor = request.user,
+                post = post
+        )
+        
+        comentario.save()
+        
+        return redirect(f'/blog/post?post_id={post.id}')
+        
+    return render(request, 'post/readPost.html',{'post':post, 'formularioComentario': formularioComentario, 'comentarios': comentarios})
 
+# Vista para borrar un post
 def delete_post(request):
     post_id = request.GET.get('post_id')
     post = Post.objects.get(pk=post_id)
@@ -55,6 +78,7 @@ def delete_post(request):
     messages.success(request, 'Post eliminado exitosamente')
     return redirect('Blog')
 
+# Vista para editar un post
 def edit_post(request):
     post_id = request.GET.get('post_id')
     post = Post.objects.get(pk=post_id)
@@ -73,4 +97,19 @@ def edit_post(request):
         formularioEditarPost = FormularioEditarPost(post=post)
         
     return render(request, 'post/editPost.html',{'post':post, 'formularioEditarPost':formularioEditarPost})
+
+# Vista para crear un comentario asociado a un post
+def CreateComment(request):
+    formularioComentario = FormularioComentario(data=request.POST)
+    
+    if formularioComentario.is_valid():
+        comentario = Comment(
+            texto = formularioComentario.cleaned_data["texto"],
+            autor = request.user
+            
+        )
+        
+        comentario.save()
+        
+        return redirect('Blog')
 

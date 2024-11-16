@@ -48,3 +48,10 @@ class FormularioEditarPost(forms.Form):
             self.fields['contenido'].initial = post.contenido
             self.fields['imagen'].initial = post.imagen
             self.fields['categorias'].initial = post.categorias.all()
+            
+class FormularioComentario(forms.Form):
+    texto = forms.CharField(max_length=500,
+                             widget=forms.TextInput(attrs={
+                                 'class': 'form-control',
+                                 'placeholder': 'Contenido...'
+                             }))

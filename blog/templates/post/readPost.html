@@ -34,5 +34,38 @@
         </div>
 
     </div>
+
+    <div>
+
+        {% if comentarios %}
+
+        {% for comentario in comentarios %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="card-title">{{comentario.autor}}</h5>
+                <small class="text-muted">{{comentario.created|date:"d/m/y"}}</small>
+            </div>
+            <div class="card-body">
+                <p>{{ comentario.texto }}</p>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+
+
+        <form action="" method="POST" enctype="form-data" class="p-4 border rounded bg-light">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ formularioComentario.texto.label_tag }}
+                {{ formularioComentario.texto }}
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3 w-100">Comentar</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
