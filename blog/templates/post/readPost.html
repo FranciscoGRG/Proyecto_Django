@@ -4,6 +4,17 @@
 
 {% block content %}
 <div class="container my-5">
+
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <h1 class="text-center mb-5">Entradas del post {{post.titulo}}</h1>
 
     <div class="row justify-content-center">
@@ -48,6 +59,11 @@
             <div class="card-body">
                 <p>{{ comentario.texto }}</p>
             </div>
+
+            <div class="card-footer">
+                <a href="{% url 'DeleteComment' %}?comment_id={{comentario.id}}" class="btn btn-danger">Eliminar
+                    comentario</a>
+            </div>
         </div>
 
         {% endfor %}
@@ -55,7 +71,7 @@
         {% endif %}
 
 
-
+        {% if user.is_authenticated %}
         <form action="" method="POST" enctype="form-data" class="p-4 border rounded bg-light">
             {% csrf_token %}
 
@@ -66,6 +82,10 @@
 
             <button type="submit" class="btn btn-primary mt-3 w-100">Comentar</button>
         </form>
+
+        {% else %}
+        <p>Debes <a href="{% url 'login' %}">iniciar sesion</a> para escribir comentarios</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

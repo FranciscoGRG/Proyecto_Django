@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete_post', views.delete_post, name='Delete'),
     path('edit', views.edit_post, name='EditPost'),
     path('comentar', views.CreateComment, name='Comentar'),
+    path('delete_comment', views.DeleteComment, name='DeleteComment'),
 ]

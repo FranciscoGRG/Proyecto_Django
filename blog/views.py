@@ -110,6 +110,13 @@ def CreateComment(request):
         )
         
         comentario.save()
-        
+        messages.success(request, 'Comentario creado exitosamente')
         return redirect('Blog')
 
+def DeleteComment(request):
+    comment_id = request.GET.get('comment_id')
+    comment = Comment.objects.get(pk=comment_id)
+    post_id = comment.post_id
+    comment.delete()
+    messages.success(request, 'Comentario eliminado exitosamente')
+    return redirect(f'/blog/post?post_id={post_id}')
