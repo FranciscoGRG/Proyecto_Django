@@ -8,7 +8,20 @@ from django.contrib import messages
 # Vista para mostrar los post
 def blog(request):
     posts = Post.objects.all()
-    return render(request, 'blog/blog.html', {'posts': posts})
+    categorias = Categoria.objects.all()
+    
+    categoria_id = request.GET.get('categoria')
+    if categoria_id:
+        posts = posts.filter(categorias__id=categoria_id)
+
+    fecha_inicio = request.GET.get('fecha_inicio')
+    fecha_fin = request.GET.get('fecha_fin')
+    if fecha_inicio:
+        posts = posts.filter(created__gte=fecha_inicio)
+    if fecha_fin:
+        posts = posts.filter(created__lte=fecha_fin)
+        
+    return render(request, 'blog/blog.html', {'posts': posts, 'categorias': categorias})
 
 
 # Vista para mostrar el formulario para crear un post y procesarlo

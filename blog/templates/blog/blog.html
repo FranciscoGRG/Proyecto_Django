@@ -17,6 +17,38 @@
 
     <h1 class="text-center mb-5">Entradas del Blog</h1>
 
+    <form method="GET" action="" class="mb-4">
+        <div class="row">
+            <!-- Filtro por categoría -->
+            <div class="col-md-4">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select class="form-select" id="categoria" name="categoria">
+                    <option value="">Todas</option>
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}" {% if request.GET.categoria == categoria.id|stringformat:"s" %}selected{% endif %}>{{ categoria.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Filtro por fecha inicial -->
+            <div class="col-md-3">
+                <label for="fecha_inicio" class="form-label">Desde</label>
+                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{ request.GET.fecha_inicio }}">
+            </div>
+
+            <!-- Filtro por fecha final -->
+            <div class="col-md-3">
+                <label for="fecha_fin" class="form-label">Hasta</label>
+                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" value="{{ request.GET.fecha_fin }}">
+            </div>
+
+            <!-- Botón para aplicar filtros -->
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </div>
+    </form>
+
     <div class="row justify-content-center">
         {% for post in posts %}
         <div class="col-md-4">
